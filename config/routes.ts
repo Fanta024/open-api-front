@@ -39,18 +39,18 @@ export default [
         redirect: '/admin/sub-page',
       },
       {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        component: './Admin',
-      },
+        path: '/admin/interface_info',
+        name: '接口管理',
+        component: './InterfaceInfo'
+      }
     ],
   },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
+  // {
+  //   name: 'list.table-list',
+  //   icon: 'table',
+  //   path: '/list',
+  //   component: './InterfaceInfo',
+  // },
   {
     path: '/',
     redirect: '/welcome',
