@@ -49,10 +49,10 @@ export async function getInterfaceInfoByIdUsingGET(
 
 /** invokeInterfaceInfo POST /api/interfaceInfo/interfaceInfo/ */
 export async function invokeInterfaceInfoUsingPOST(
-  body: API.IdRequest,
+  body: API.InterfaceInfoInvokeRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseInterfaceInfo>('/api/interfaceInfo/interfaceInfo/', {
+  return request<API.BaseResponsestring>('/api/interfaceInfo/interfaceInfo/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -119,7 +119,7 @@ const TableList: React.FC = () => {
       return true;
     } catch (error: any) {
       hide();
-      message.error('操作成功，' + error.message);
+      message.error('操作失败，' + error.message);
       return false;
     }
   };
@@ -141,7 +141,7 @@ const TableList: React.FC = () => {
       return true;
     } catch (error: any) {
       hide();
-      message.error('操作成功，' + error.message);
+      message.error('操作失败，' + error.message);
       return false;
     }
   };
