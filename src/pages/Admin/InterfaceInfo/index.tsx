@@ -1,8 +1,8 @@
 import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns, ProDescriptionsItemProps} from '@ant-design/pro-components';
 import {FooterToolbar, PageContainer, ProDescriptions, ProTable,} from '@ant-design/pro-components';
-import {FormattedMessage, useIntl} from '@umijs/max';
-import {Button, Drawer, message} from 'antd';
+import {FormattedMessage} from '@umijs/max';
+import {Button, Drawer, message, Popconfirm} from 'antd';
 import React, {useRef, useState} from 'react';
 import UpdateModal from './components/UpdateModal';
 import {
@@ -19,13 +19,11 @@ import CreateModal from "@/pages/Admin/InterfaceInfo/components/CreateModal";
 
 const TableList: React.FC = () => {
   /**
-   * @en-US Pop-up window of new window
-   * @zh-CN 新建窗口的弹窗
+   * 新建窗口的弹窗
    *  */
   const [createModalOpen, handleModalOpen] = useState<boolean>(false);
   /**
-   * @en-US The pop-up window of the distribution update window
-   * @zh-CN 分布更新窗口的弹窗
+   * 分布更新窗口的弹窗
    * */
   const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
 
@@ -35,8 +33,7 @@ const TableList: React.FC = () => {
   const [currentRow, setCurrentRow] = useState<API.InterfaceInfo>();
   const [selectedRowsState, setSelectedRows] = useState<API.InterfaceInfo[]>([]);
   /**
-   * @en-US Add node
-   * @zh-CN 添加节点、
+   * 添加节点
    * @param fields
    */
   const handleAdd = async (fields: API.InterfaceInfoAddRequest) => {
@@ -54,9 +51,7 @@ const TableList: React.FC = () => {
     }
   };
   /**
-   * @en-US Update node
-   * @zh-CN 更新节点
-   *
+   * 更新节点
    * @param record
    */
   const handleUpdate = async (record: API.InterfaceInfoUpdateRequest) => {
@@ -81,9 +76,7 @@ const TableList: React.FC = () => {
   };
 
   /**
-   *  Delete node
-   * @zh-CN 删除节点
-   *
+   *  删除接口
    * @param record
    */
   const handleRemove = async (record: API.InterfaceInfo) => {
@@ -105,7 +98,6 @@ const TableList: React.FC = () => {
   };
   /**
    * 发布接口
-   *
    * @param record
    */
   const handleOnline = async (record: API.IdRequest) => {
@@ -117,7 +109,7 @@ const TableList: React.FC = () => {
       });
       hide();
       message.success('操作成功');
-      actionRef.current?.reload();
+      actionRef.current?.reloadAndRest?.();
       return false;
     } catch (error: any) {
       hide();
@@ -127,7 +119,6 @@ const TableList: React.FC = () => {
   };
   /**
    * 下线接口
-   *
    * @param record
    */
   const handleOffline = async (record: API.IdRequest) => {
@@ -139,7 +130,7 @@ const TableList: React.FC = () => {
       });
       hide();
       message.success('操作成功');
-      actionRef.current?.reload();
+      actionRef.current?.reloadAndRest?.();
       return false;
     } catch (error: any) {
       hide();
@@ -147,11 +138,6 @@ const TableList: React.FC = () => {
       return true;
     }
   };
-  /**
-   * @en-US International configuration
-   * @zh-CN 国际化配置
-   * */
-  const intl = useIntl();
 
   const columns: ProColumns<API.InterfaceInfo>[] = [
     {
@@ -223,34 +209,34 @@ const TableList: React.FC = () => {
         >
           修改
         </a>,
-        record.status === 0 ? <a
-          key="config"
-          onClick={() => {
-            handleOnline(record);
+        <Popconfirm
+          title="确定要删除?"
+          key="del"
+          onConfirm={async () => {
+            await handleRemove(record);
           }}
         >
-          发布
-        </a> : null,
-        record.status === 1 ? <Button
-          type="text"
-          key="config"
-          danger
-          onClick={() => {
-            handleOffline(record);
-          }}
-        >
-          下线
-        </Button> : null,
-        <Button
-          type="text"
-          key="config"
-          danger
-          onClick={() => {
-            handleRemove(record);
-          }}
-        >
-          删除
-        </Button>,
+          <a>删除</a>
+        </Popconfirm>,
+        record.status == 0 ?
+          <Popconfirm
+            title="确定要发布?"
+            key="online"
+            onConfirm={async () => {
+              await handleOnline(record);
+            }}
+          >
+            <a>发布</a>
+          </Popconfirm> :
+          <Popconfirm
+            title="确定要下线?"
+            key="offline"
+            onConfirm={async () => {
+              await handleOffline(record);
+            }}
+          >
+            <a>下线</a>
+          </Popconfirm>,
       ],
     },
   ];
@@ -258,10 +244,6 @@ const TableList: React.FC = () => {
   return (
     <PageContainer>
       <ProTable<API.InterfaceInfo, API.PageParams>
-        headerTitle={intl.formatMessage({
-          id: 'pages.searchTable.title',
-          defaultMessage: 'Enquiry form',
-        })}
         actionRef={actionRef}
         rowKey="key"
         search={{
@@ -275,7 +257,7 @@ const TableList: React.FC = () => {
               handleModalOpen(true);
             }}
           >
-            <PlusOutlined/> <FormattedMessage id="pages.searchTable.new" defaultMessage="New"/>
+            <PlusOutlined/> <FormattedMessage id="pages.searchTable.new" defaultMessage="添加"/>
           </Button>,
         ]}
         request={async (params: {
