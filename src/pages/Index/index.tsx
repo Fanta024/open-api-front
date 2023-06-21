@@ -1,11 +1,11 @@
 import {PageContainer} from '@ant-design/pro-components';
 import {useModel} from '@umijs/max';
-import {Button, Card, List, Progress, Space, Tag, message, Pagination} from 'antd';
+import {Card, List, message, Pagination} from 'antd';
 import React, {useEffect, useState} from 'react';
 import {listInterfaceInfoByPageUsingGET} from "@/services/openapiBackend/interfaceInfoController";
 
 
-const PAGESIZE = 3
+const PAGESIZE = 10
 const Index: React.FC = () => {
   const {initialState} = useModel('@@initialState');
   const [loading, setLoading] = useState(false);

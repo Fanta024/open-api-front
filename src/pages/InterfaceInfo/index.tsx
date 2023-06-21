@@ -1,6 +1,6 @@
 import {PageContainer} from '@ant-design/pro-components';
 import React, {useEffect, useState} from 'react';
-import {Button, Card, Descriptions, Form, message, Input, Spin, Divider} from 'antd';
+import {Button, Card, Descriptions, Divider, Form, Input, message} from 'antd';
 
 import {useParams} from '@@/exports';
 import {
@@ -83,7 +83,7 @@ const Index: React.FC = () => {
       <Divider/>
       <Card title="在线测试">
         <Form name="invoke" layout="vertical" onFinish={onFinish}>
-          <Form.Item label="请求参数" name="requestParams">
+          <Form.Item label="请求参数" name="userRequestParams">
             <Input.TextArea/>
           </Form.Item>
           <Form.Item wrapperCol={{span: 16}}>

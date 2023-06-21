@@ -8,7 +8,9 @@ import UpdateModal from './components/UpdateModal';
 import {
   addInterfaceInfoUsingPOST,
   deleteInterfaceInfoUsingPOST,
-  listInterfaceInfoByPageUsingGET, offlineInterfaceInfoUsingPOST, onlineInterfaceInfoUsingPOST,
+  listInterfaceInfoByPageUsingGET,
+  offlineInterfaceInfoUsingPOST,
+  onlineInterfaceInfoUsingPOST,
   updateInterfaceInfoUsingPOST
 } from "@/services/openapiBackend/interfaceInfoController";
 import {SortOrder} from "antd/es/table/interface";
@@ -44,11 +46,11 @@ const TableList: React.FC = () => {
       hide();
       message.success('添加成功');
       handleUpdateModalOpen(false)
-      return true;
+      return false;
     } catch (error) {
       hide();
       message.error('操作异常');
-      return false;
+      return true;
     }
   };
   /**
@@ -70,11 +72,11 @@ const TableList: React.FC = () => {
       });
       hide();
       message.success('操作成功');
-      return true;
+      return false;
     } catch (error: any) {
       hide();
       message.error('操作失败，' + error.message);
-      return false;
+      return true;
     }
   };
 
@@ -94,11 +96,11 @@ const TableList: React.FC = () => {
       hide();
       message.success('删除成功');
       actionRef.current?.reload();
-      return true;
+      return false;
     } catch (error: any) {
       hide();
       message.error('删除失败，' + error.message);
-      return false;
+      return true;
     }
   };
   /**
@@ -116,11 +118,11 @@ const TableList: React.FC = () => {
       hide();
       message.success('操作成功');
       actionRef.current?.reload();
-      return true;
+      return false;
     } catch (error: any) {
       hide();
       message.error('操作失败，' + error.message);
-      return false;
+      return true;
     }
   };
   /**
@@ -138,11 +140,11 @@ const TableList: React.FC = () => {
       hide();
       message.success('操作成功');
       actionRef.current?.reload();
-      return true;
+      return false;
     } catch (error: any) {
       hide();
       message.error('操作失败，' + error.message);
-      return false;
+      return true;
     }
   };
   /**
@@ -315,7 +317,7 @@ const TableList: React.FC = () => {
                   id="pages.searchTable.totalServiceCalls"
                   defaultMessage="Total number of service calls"
                 />{' '}
-                {selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)}{' '}
+                {/*{selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)}{' '}*/}
                 <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万"/>
               </span>
             </div>
@@ -323,7 +325,7 @@ const TableList: React.FC = () => {
         >
           <Button
             onClick={async () => {
-              await handleRemove(selectedRowsState);
+              // await handleRemove(selectedRowsState);
               setSelectedRows([]);
               actionRef.current?.reloadAndRest?.();
             }}

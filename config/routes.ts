@@ -13,7 +13,7 @@
 export default [
   {
     path: '/',
-    name: '主页',
+    name: '接口列表',
     icon: 'smile',
     component: './Index',
   },
@@ -41,14 +41,15 @@ export default [
     access: 'canAdmin',
     routes: [
       {
-        path: '/admin',
-        redirect: '/admin/sub-page',
-      },
-      {
         path: '/admin/interface_info',
         name: '接口管理',
         component: './Admin/InterfaceInfo'
-      }
+      },
+      {
+        path: '/admin/analysis_interface',
+        name: '接口分析',
+        component: './Admin/AnalysisInterface',
+      },
     ],
   },
   // {
