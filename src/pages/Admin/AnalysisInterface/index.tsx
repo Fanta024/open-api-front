@@ -1,8 +1,7 @@
 import {PageContainer} from '@ant-design/pro-components';
 import ReactECharts from 'echarts-for-react';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {listTopInvokeInterfaceInfoUsingGET} from "@/services/openapiBackend/analysisInterfaceController";
-import {message} from "antd";
 
 const AnalysisInterface: React.FC = () => {
   const [data, setData] = useState<API.InterfaceInfoVO[]>([])
@@ -15,7 +14,6 @@ const AnalysisInterface: React.FC = () => {
         }
       });
     } catch (e) {
-      message.error('服务器异常');
     }
   }, [])  //deps内的数据发生变化后会执行回调函数  这里是空数组  所有只会执行一次
   const echartsData = data.map(item => {

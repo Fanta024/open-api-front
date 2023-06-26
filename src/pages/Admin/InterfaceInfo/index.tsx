@@ -1,7 +1,6 @@
 import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns, ProDescriptionsItemProps} from '@ant-design/pro-components';
 import {FooterToolbar, PageContainer, ProDescriptions, ProTable,} from '@ant-design/pro-components';
-import {FormattedMessage} from '@umijs/max';
 import {Button, Drawer, message, Popconfirm} from 'antd';
 import React, {useRef, useState} from 'react';
 import UpdateModal from './components/UpdateModal';
@@ -240,7 +239,6 @@ const TableList: React.FC = () => {
       ],
     },
   ];
-
   return (
     <PageContainer>
       <ProTable<API.InterfaceInfo, API.PageParams>
@@ -257,7 +255,7 @@ const TableList: React.FC = () => {
               handleModalOpen(true);
             }}
           >
-            <PlusOutlined/> <FormattedMessage id="pages.searchTable.new" defaultMessage="添加"/>
+            <PlusOutlined/> 添加
           </Button>,
         ]}
         request={async (params: {
@@ -290,17 +288,15 @@ const TableList: React.FC = () => {
         <FooterToolbar
           extra={
             <div>
-              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="Chosen"/>{' '}
+              Chosen{' '}
               <a style={{fontWeight: 600}}>{selectedRowsState.length}</a>{' '}
-              <FormattedMessage id="pages.searchTable.item" defaultMessage="项"/>
+              项
               &nbsp;&nbsp;
               <span>
-                <FormattedMessage
-                  id="pages.searchTable.totalServiceCalls"
-                  defaultMessage="Total number of service calls"
-                />{' '}
+               Total number of service calls
+                {' '}
                 {/*{selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)}{' '}*/}
-                <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万"/>
+                万
               </span>
             </div>
           }
@@ -312,16 +308,10 @@ const TableList: React.FC = () => {
               actionRef.current?.reloadAndRest?.();
             }}
           >
-            <FormattedMessage
-              id="pages.searchTable.batchDeletion"
-              defaultMessage="Batch deletion"
-            />
+            Batch deletion
           </Button>
           <Button type="primary">
-            <FormattedMessage
-              id="pages.searchTable.batchApproval"
-              defaultMessage="Batch approval"
-            />
+            Batch approval
           </Button>
         </FooterToolbar>
       )}
