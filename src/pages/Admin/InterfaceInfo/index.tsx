@@ -243,7 +243,7 @@ const TableList: React.FC = () => {
     <PageContainer>
       <ProTable<API.InterfaceInfo, API.PageParams>
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="id"
         search={{
           labelWidth: 120,
         }}
