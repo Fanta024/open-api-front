@@ -26,7 +26,7 @@ interface ResponseStructure {
  */
 export const requestConfig: RequestConfig = {
   // 错误处理： umi@3 的错误处理方案。
-  baseURL: "http://localhost:7529",
+  baseURL: "http://localhost:9999",
   withCredentials: true,
 
   // 请求拦截器

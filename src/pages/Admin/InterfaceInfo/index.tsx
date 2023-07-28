@@ -1,6 +1,6 @@
 import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns, ProDescriptionsItemProps} from '@ant-design/pro-components';
-import {FooterToolbar, PageContainer, ProDescriptions, ProTable,} from '@ant-design/pro-components';
+import {PageContainer, ProDescriptions, ProTable,} from '@ant-design/pro-components';
 import {Button, Drawer, message, Popconfirm} from 'antd';
 import React, {useRef, useState} from 'react';
 import UpdateModal from './components/UpdateModal';
@@ -284,38 +284,6 @@ const TableList: React.FC = () => {
           },
         }}
       />
-      {selectedRowsState?.length > 0 && (
-        <FooterToolbar
-          extra={
-            <div>
-              Chosen{' '}
-              <a style={{fontWeight: 600}}>{selectedRowsState.length}</a>{' '}
-              项
-              &nbsp;&nbsp;
-              <span>
-               Total number of service calls
-                {' '}
-                {/*{selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)}{' '}*/}
-                万
-              </span>
-            </div>
-          }
-        >
-          <Button
-            onClick={async () => {
-              // await handleRemove(selectedRowsState);
-              setSelectedRows([]);
-              actionRef.current?.reloadAndRest?.();
-            }}
-          >
-            Batch deletion
-          </Button>
-          <Button type="primary">
-            Batch approval
-          </Button>
-        </FooterToolbar>
-      )}
-
       <UpdateModal
         columns={columns}
         onSubmit={async (value) => {

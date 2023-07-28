@@ -55,20 +55,20 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
   return {
     actionsRender: () => [<Question key="doc"/>],
     avatarProps: {
-      src: initialState?.currentUser?.userAvatar,
+      src: initialState?.loginUser?.userAvatar,
       title: <AvatarName/>,
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
       },
     },
     waterMarkProps: {
-      content: initialState?.currentUser?.userName,
+      content: initialState?.loginUser?.userName,
     },
     footerRender: () => <Footer/>,
     onPageChange: () => {
       const {location} = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
+      if (!initialState?.loginUser && location.pathname !== loginPath) {
         history.push(loginPath);
       }
     },
